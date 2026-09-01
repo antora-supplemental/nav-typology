@@ -1,0 +1,47 @@
+:root {
+  --typology-component-root: #178f80;
+  --typology-spec-component: #2563eb;
+  --typology-spec-feature: #7c3aed;
+  --typology-diataxis-tutorial: #2563eb;
+  --typology-diataxis-howto: #178f80;
+  --typology-diataxis-reference: #7c3aed;
+  --typology-diataxis-explanation: #d97706;
+}
+
+html.dark-theme {
+  --typology-component-root: #2dd4bf;
+  --typology-spec-component: #60a5fa;
+  --typology-spec-feature: #a78bfa;
+  --typology-diataxis-tutorial: #60a5fa;
+  --typology-diataxis-howto: #2dd4bf;
+  --typology-diataxis-reference: #a78bfa;
+  --typology-diataxis-explanation: #fbbf24;
+}
+
+.nav-link,
+.nav-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.nav-typology-icon {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+  fill: currentColor;
+  vertical-align: -0.125em;
+}
+
+.nav-typology-icon--component-root { color: var(--typology-component-root); }
+.nav-typology-icon--spec-component { color: var(--typology-spec-component); }
+.nav-typology-icon--spec-feature { color: var(--typology-spec-feature); }
+.nav-typology-icon--diataxis-tutorial { color: var(--typology-diataxis-tutorial); }
+.nav-typology-icon--diataxis-howto { color: var(--typology-diataxis-howto); }
+.nav-typology-icon--diataxis-reference { color: var(--typology-diataxis-reference); }
+.nav-typology-icon--diataxis-explanation { color: var(--typology-diataxis-explanation); }
+
+.nav-item.has-nav-typology > .nav-text .nav-typology-label,
+.nav-item.has-nav-typology > .nav-link .nav-text {
+  min-width: 0;
+}

@@ -1,0 +1,63 @@
+= nav-typology
+:description: Antora extension for uniform SVG typology icons in sidebar navigation.
+:page-audience: Antora hub maintainers
+:page-usage-context: Register after site-nav-tree; optional nav-typology-diataxis plugin for Diátaxis sites
+
+Structural navigation labels (Diátaxis buckets, component roots, spec groupings) should look identical on every OS. Unicode emoji in nav titles vary by platform font and steal design space from expressive emoji elsewhere.
+
+*nav-typology* enriches Antora navigation items at build time with `navTypology` metadata and renders a shared SVG sprite in the sidebar via an overridden `nav-tree` partial.
+
+== Install
+
+[source,bash]
+----
+pnpm add -D github:antora-supplemental/nav-typology#main
+----
+
+Optional Diátaxis auto-detection (separate package — not in default Facto hard deps):
+
+[source,bash]
+----
+pnpm add -D github:antora-supplemental/nav-typology-diataxis#main
+----
+
+== Playbook
+
+Register **after** `@antora-supplemental/site-nav-tree` so component forest roots receive typology icons.
+
+[source,yaml]
+----
+antora:
+  extensions:
+    - require: '@antora-supplemental/site-nav-tree'
+      include: [home, general-knowledge]
+    - require: '@antora-supplemental/nav-typology'
+    - require: '@antora-supplemental/nav-typology-diataxis'
+----
+
+== Behavior
+
+* Wraps `NavigationCatalog#getNavigation` after Antora builds nav (same hook pattern as site-nav-tree).
+* Detects typologies from URL paths, titles, and depth (component forest roots at depth 0).
+* Strips leading structural emoji from nav labels when a typology icon replaces them.
+* Ships `ui/partials/nav-tree.hbs`, `ui/css/nav-typology.css`, and `ui/img/nav-typology.svg`.
+
+== Optional config
+
+[source,yaml]
+----
+- require: '@antora-supplemental/nav-typology'
+  stripEmoji: true
+  componentTypologies:
+    DevCentr: component-root
+    general-knowledge: component-root
+----
+
+== Plugins
+
+`@antora-supplemental/nav-typology-diataxis` enables the `diataxis` plugin (path/title rules for tutorial / how-to / reference / explanation). Sites that do not use Diátaxis omit that package entirely.
+
+== Related
+
+* `@antora-supplemental/site-nav-tree` — site-wide component forest (register nav-typology after this)
+* Hub doc: multi-nav concatenation vs `include::` nesting
