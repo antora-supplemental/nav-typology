@@ -1,5 +1,10 @@
 = Changelog
 
+== 0.1.2 (2026-09-01)
+
+* Changelog typology icon (`icon-changelog`) with warm accent + semibold label.
+* Auto-detect `changelog` / `activity-log` nav entries; hoist them to second slot in each branch.
+
 == 0.1.1 (2026-09-01)
 
 * Companion UI: sync working nav-tree partial + split helpers (`nav-typology-id`, `nav-typology-icon`, `strip-nav-typology-emoji`).

@@ -12,6 +12,11 @@ const TYPOLOGIES = {
     spriteId: 'icon-diataxis-explanation',
     label: 'Explanation',
   },
+  changelog: {
+    id: 'changelog',
+    spriteId: 'icon-changelog',
+    label: 'Changelog',
+  },
 }
 
 function normalizeUrl (url) {
@@ -38,11 +43,13 @@ function resolveTypology (item, options = {}) {
   let id = null
   if (depth === 0 && item.url && Array.isArray(item.items) && item.items.length) {
     id = 'component-root'
+  } else if (/\/changelog(\/|$)/.test(url) || /\/activity-log(\/|$)/.test(url) || /^changelog\b/.test(text) || text === 'activity log') {
+    id = 'changelog'
   } else if (diataxis) {
-    if (/\/tutorials(\/|$)/.test(url) || /^tutorials\b/.test(text)) id = 'diataxis-tutorial'
-    else if (/\/how-to(\/|$)/.test(url) || /how-to/.test(text)) id = 'diataxis-howto'
-    else if (/\/reference(\/|$)/.test(url) || /^reference\b/.test(text)) id = 'diataxis-reference'
-    else if (/\/explanation(\/|$)/.test(url) || /^explanation\b/.test(text)) id = 'diataxis-explanation'
+    if (/\/tutorials(\/|$)/.test(url) || /^\.?\s*tutorials\b/.test(text)) id = 'diataxis-tutorial'
+    else if (/\/how-to(\/|$)/.test(url) || /^\.?\s*how-to/.test(text)) id = 'diataxis-howto'
+    else if (/\/reference(\/|$)/.test(url) || /^\.?\s*reference\b/.test(text)) id = 'diataxis-reference'
+    else if (/\/explanation(\/|$)/.test(url) || /^\.?\s*explanation\b/.test(text)) id = 'diataxis-explanation'
   }
 
   if (!id) {

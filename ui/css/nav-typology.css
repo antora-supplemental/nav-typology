@@ -6,6 +6,7 @@
   --typology-diataxis-howto: #178f80;
   --typology-diataxis-reference: #7c3aed;
   --typology-diataxis-explanation: #d97706;
+  --typology-changelog: #c2410c;
   --nav-typology-icon-size: 0.85em;
 }
 
@@ -17,6 +18,7 @@ html.dark-theme {
   --typology-diataxis-howto: #2dd4bf;
   --typology-diataxis-reference: #a78bfa;
   --typology-diataxis-explanation: #fbbf24;
+  --typology-changelog: #fb923c;
 }
 
 nav.nav-menu.nav-tree-only .nav-item > .nav-link,
@@ -54,3 +56,11 @@ nav.nav-menu.adt-nav-tree-only .nav-item > .nav-text > .nav-typology-label {
 .nav-typology-icon--diataxis-howto { color: var(--typology-diataxis-howto); }
 .nav-typology-icon--diataxis-reference { color: var(--typology-diataxis-reference); }
 .nav-typology-icon--diataxis-explanation { color: var(--typology-diataxis-explanation); }
+.nav-typology-icon--changelog { color: var(--typology-changelog); font-weight: 600; }
+
+nav.nav-menu.nav-tree-only .nav-item[data-nav-typology="changelog"] > .nav-link,
+nav.nav-menu.adt-nav-tree-only .nav-item[data-nav-typology="changelog"] > .nav-link,
+nav.nav-menu.nav-tree-only .nav-item[data-nav-typology="changelog"] > .nav-text,
+nav.nav-menu.adt-nav-tree-only .nav-item[data-nav-typology="changelog"] > .nav-text {
+  font-weight: 600;
+}

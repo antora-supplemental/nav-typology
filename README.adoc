@@ -38,7 +38,8 @@ antora:
 == Behavior
 
 * Wraps `NavigationCatalog#getNavigation` after Antora builds nav (same hook pattern as site-nav-tree).
-* Detects typologies from URL paths, titles, and depth (component forest roots at depth 0).
+* Detects typologies from URL paths, titles, and depth (component forest roots at depth 0; changelog / activity-log).
+* Hoists changelog siblings to position 2 in each nav branch (after the first landing link).
 * Strips leading structural emoji from nav labels when a typology icon replaces them.
 * Ships `ui/partials/nav-tree.hbs`, `ui/helpers/nav-typology-*.js`, `ui/css/nav-typology.css`, `ui/img/nav-typology.svg`, and `ui/partials/head-nav-typology-css.hbs`.
 
