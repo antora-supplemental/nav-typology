@@ -6,6 +6,7 @@
   --typology-diataxis-howto: #178f80;
   --typology-diataxis-reference: #7c3aed;
   --typology-diataxis-explanation: #d97706;
+  --nav-typology-icon-size: 0.85em;
 }
 
 html.dark-theme {
@@ -18,19 +19,32 @@ html.dark-theme {
   --typology-diataxis-explanation: #fbbf24;
 }
 
-.nav-link,
-.nav-text {
-  display: inline-flex;
+nav.nav-menu.nav-tree-only .nav-item > .nav-link,
+nav.nav-menu.adt-nav-tree-only .nav-item > .nav-link,
+nav.nav-menu.nav-tree-only .nav-item > .nav-text,
+nav.nav-menu.adt-nav-tree-only .nav-item > .nav-text {
+  display: flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.35rem;
 }
 
-.nav-typology-icon {
-  width: 1em;
-  height: 1em;
-  flex-shrink: 0;
+nav.nav-menu.nav-tree-only .nav-typology-icon,
+nav.nav-menu.adt-nav-tree-only .nav-typology-icon {
+  width: var(--nav-typology-icon-size);
+  height: var(--nav-typology-icon-size);
+  min-width: var(--nav-typology-icon-size);
+  max-width: var(--nav-typology-icon-size);
+  flex: 0 0 var(--nav-typology-icon-size);
   fill: currentColor;
-  vertical-align: -0.125em;
+  overflow: visible;
+}
+
+nav.nav-menu.nav-tree-only .nav-item > .nav-link > .nav-text,
+nav.nav-menu.adt-nav-tree-only .nav-item > .nav-link > .nav-text,
+nav.nav-menu.nav-tree-only .nav-item > .nav-text > .nav-typology-label,
+nav.nav-menu.adt-nav-tree-only .nav-item > .nav-text > .nav-typology-label {
+  min-width: 0;
+  flex: 1 1 auto;
 }
 
 .nav-typology-icon--component-root { color: var(--typology-component-root); }
@@ -40,8 +54,3 @@ html.dark-theme {
 .nav-typology-icon--diataxis-howto { color: var(--typology-diataxis-howto); }
 .nav-typology-icon--diataxis-reference { color: var(--typology-diataxis-reference); }
 .nav-typology-icon--diataxis-explanation { color: var(--typology-diataxis-explanation); }
-
-.nav-item.has-nav-typology > .nav-text .nav-typology-label,
-.nav-item.has-nav-typology > .nav-link .nav-text {
-  min-width: 0;
-}
