@@ -1,6 +1,6 @@
 'use strict'
 
-const { resolveTypologyId } = require('../../lib/resolve-typology')
+const { resolveTypologyId: resolveTypologyIdCore } = require('@antora-supplemental/nav-typology/lib/resolve-typology')
 
 const TYPOLOGIES = {
   'component-root': { id: 'component-root', spriteId: 'icon-component-root', label: 'Component' },
@@ -38,7 +38,7 @@ function resolveTypology (item, options = {}) {
   if (depth === 0 && item.url && Array.isArray(item.items) && item.items.length) {
     id = 'component-root'
   } else {
-    id = resolveTypologyId(item, {
+    id = resolveTypologyIdCore(item, {
       depth,
       parentTypologyId,
       diataxisEnabled: diataxis,

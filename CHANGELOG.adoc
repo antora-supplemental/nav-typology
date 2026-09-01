@@ -1,5 +1,9 @@
 = Changelog
 
+== 0.1.4 (2026-09-01)
+
+* UI helpers require `@antora-supplemental/nav-typology/lib/resolve-typology` (Antora `requireFromString` cannot load sibling helper modules).
+
 == 0.1.3 (2026-09-01)
 
 * Diátaxis detection: URL path wins over title prefix (fixes *Reference reliability* under `/explanation/`).
