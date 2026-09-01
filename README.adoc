@@ -40,7 +40,27 @@ antora:
 * Wraps `NavigationCatalog#getNavigation` after Antora builds nav (same hook pattern as site-nav-tree).
 * Detects typologies from URL paths, titles, and depth (component forest roots at depth 0).
 * Strips leading structural emoji from nav labels when a typology icon replaces them.
-* Ships `ui/partials/nav-tree.hbs`, `ui/css/nav-typology.css`, and `ui/img/nav-typology.svg`.
+* Ships `ui/partials/nav-tree.hbs`, `ui/helpers/nav-typology-*.js`, `ui/css/nav-typology.css`, `ui/img/nav-typology.svg`, and `ui/partials/head-nav-typology-css.hbs`.
+
+== Companion UI (required)
+
+Antora does not auto-merge extension UI. Copy into hub `supplemental-ui/`:
+
+[source,bash]
+----
+cp node_modules/@antora-supplemental/nav-typology/ui/partials/nav-tree.hbs supplemental-ui/partials/
+cp node_modules/@antora-supplemental/nav-typology/ui/helpers/nav-typology-*.js supplemental-ui/helpers/
+cp node_modules/@antora-supplemental/nav-typology/ui/helpers/strip-nav-typology-emoji.js supplemental-ui/helpers/
+cp node_modules/@antora-supplemental/nav-typology/ui/css/nav-typology.css supplemental-ui/css/
+cp node_modules/@antora-supplemental/nav-typology/ui/img/nav-typology.svg supplemental-ui/img/
+----
+
+Link CSS in `head-meta.hbs` (or `{{> head-nav-typology-css}}` after copying the snippet partial):
+
+[source,html]
+----
+<link rel="stylesheet" href="{{{uiRootPath}}}/css/nav-typology.css">
+----
 
 == Optional config
 

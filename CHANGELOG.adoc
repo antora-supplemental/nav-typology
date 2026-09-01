@@ -1,5 +1,11 @@
 = Changelog
 
+== 0.1.1 (2026-09-01)
+
+* Companion UI: sync working nav-tree partial + split helpers (`nav-typology-id`, `nav-typology-icon`, `strip-nav-typology-emoji`).
+* CSS: Valentus tree-only flex layout + `0.85em` icon sizing; explicit SVG dimensions in icon helper.
+* Add `head-nav-typology-css.hbs` snippet for `head-meta.hbs`.
+
 == 0.1.0 (2026-09-01)
 
 * Initial release: navigation enrichment, SVG sprite, nav-tree partial override, optional Diátaxis plugin package.

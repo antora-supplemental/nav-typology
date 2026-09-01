@@ -1,7 +1,7 @@
 {{#if navigation.length}}
 <ul class="nav-list">
   {{#each navigation}}
-  <li class="nav-item{{#if (eq ./url @root.page.url)}} is-current-page{{/if}}{{#with (navTypology this level=(or ../level 0)) as |typology|}}{{#if typology}} has-nav-typology{{/if}}{{/with}}" data-depth="{{or ../level 0}}"{{#with (navTypology this level=(or ../level 0)) as |typology|}}{{#if typology}} data-nav-typology="{{typology.id}}"{{/if}}{{/with}}>
+  <li class="nav-item{{#if (eq ./url @root.page.url)}} is-current-page{{/if}}{{#if (nav-typology-id this level=(or ../level 0))}} has-nav-typology{{/if}}" data-depth="{{or ../level 0}}" data-nav-typology="{{nav-typology-id this level=(or ../level 0)}}">
     {{#if ./content}}
     {{#if ./items.length}}
     <button class="nav-item-toggle"></button>
@@ -10,21 +10,13 @@
     <a class="nav-link" href="
       {{~#if (eq ./urlType 'internal')}}{{{relativize ./url}}}
       {{~else}}{{{./url}}}{{~/if}}">
-      {{#with (navTypology this level=(or ../level 0)) as |typology|}}
-      {{#if typology}}
-      <svg class="nav-typology-icon nav-typology-icon--{{typology.id}}" aria-hidden="true"><use href="{{{uiRootPath}}}/img/nav-typology.svg#{{typology.spriteId}}"/></svg>
-      {{/if}}
-      {{/with}}
-      <span class="nav-text">{{{stripNavTypologyEmoji ./content}}}</span>
+      {{{nav-typology-icon this level=(or ../level 0)}}}
+      <span class="nav-text">{{{strip-nav-typology-emoji ./content}}}</span>
     </a>
     {{else}}
     <span class="nav-text">
-      {{#with (navTypology this level=(or ../level 0)) as |typology|}}
-      {{#if typology}}
-      <svg class="nav-typology-icon nav-typology-icon--{{typology.id}}" aria-hidden="true"><use href="{{{uiRootPath}}}/img/nav-typology.svg#{{typology.spriteId}}"/></svg>
-      {{/if}}
-      {{/with}}
-      <span class="nav-typology-label">{{{stripNavTypologyEmoji ./content}}}</span>
+      {{{nav-typology-icon this level=(or ../level 0)}}}
+      <span class="nav-typology-label">{{{strip-nav-typology-emoji ./content}}}</span>
     </span>
     {{/if}}
     {{/if}}
