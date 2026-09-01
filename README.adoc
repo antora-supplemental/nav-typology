@@ -57,6 +57,8 @@ antora:
 
 `@antora-supplemental/nav-typology-diataxis` enables the `diataxis` plugin (path/title rules for tutorial / how-to / reference / explanation). Sites that do not use Diátaxis omit that package entirely.
 
+**Ship v1:** register the extension + copy companion UI into `supplemental-ui/` (see site-nav-tree pattern). Optional `nav-typology-diataxis` for Diátaxis sites only.
+
 == Related
 
 * `@antora-supplemental/site-nav-tree` — site-wide component forest (register nav-typology after this)

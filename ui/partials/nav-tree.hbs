@@ -1,7 +1,7 @@
 {{#if navigation.length}}
 <ul class="nav-list">
   {{#each navigation}}
-  <li class="nav-item{{#if (eq ./url @root.page.url)}} is-current-page{{/if}}{{#if ./navTypology}} has-nav-typology{{/if}}" data-depth="{{or ../level 0}}"{{#if ./navTypology}} data-nav-typology="{{./navTypology.id}}"{{/if}}>
+  <li class="nav-item{{#if (eq ./url @root.page.url)}} is-current-page{{/if}}{{#with (navTypology this level=(or ../level 0)) as |typology|}}{{#if typology}} has-nav-typology{{/if}}{{/with}}" data-depth="{{or ../level 0}}"{{#with (navTypology this level=(or ../level 0)) as |typology|}}{{#if typology}} data-nav-typology="{{typology.id}}"{{/if}}{{/with}}>
     {{#if ./content}}
     {{#if ./items.length}}
     <button class="nav-item-toggle"></button>
@@ -10,17 +10,21 @@
     <a class="nav-link" href="
       {{~#if (eq ./urlType 'internal')}}{{{relativize ./url}}}
       {{~else}}{{{./url}}}{{~/if}}">
-      {{#if ./navTypology}}
-      <svg class="nav-typology-icon nav-typology-icon--{{./navTypology.id}}" aria-hidden="true"><use href="{{{uiRootPath}}}/img/nav-typology.svg#{{./navTypology.spriteId}}"/></svg>
+      {{#with (navTypology this level=(or ../level 0)) as |typology|}}
+      {{#if typology}}
+      <svg class="nav-typology-icon nav-typology-icon--{{typology.id}}" aria-hidden="true"><use href="{{{uiRootPath}}}/img/nav-typology.svg#{{typology.spriteId}}"/></svg>
       {{/if}}
-      <span class="nav-text">{{{./content}}}</span>
+      {{/with}}
+      <span class="nav-text">{{{stripNavTypologyEmoji ./content}}}</span>
     </a>
     {{else}}
     <span class="nav-text">
-      {{#if ./navTypology}}
-      <svg class="nav-typology-icon nav-typology-icon--{{./navTypology.id}}" aria-hidden="true"><use href="{{{uiRootPath}}}/img/nav-typology.svg#{{./navTypology.spriteId}}"/></svg>
+      {{#with (navTypology this level=(or ../level 0)) as |typology|}}
+      {{#if typology}}
+      <svg class="nav-typology-icon nav-typology-icon--{{typology.id}}" aria-hidden="true"><use href="{{{uiRootPath}}}/img/nav-typology.svg#{{typology.spriteId}}"/></svg>
       {{/if}}
-      <span class="nav-typology-label">{{{./content}}}</span>
+      {{/with}}
+      <span class="nav-typology-label">{{{stripNavTypologyEmoji ./content}}}</span>
     </span>
     {{/if}}
     {{/if}}
