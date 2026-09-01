@@ -1,12 +1,13 @@
 {
   "name": "@antora-supplemental/nav-typology",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Antora extension: uniform SVG typology icons for sidebar nav (component roots, structural labels)",
   "main": "lib/index.js",
   "exports": {
     ".": "./lib/index.js",
     "./plugin-api": "./lib/plugin-api.js",
     "./lib/enrich-navigation": "./lib/enrich-navigation.js",
+    "./lib/resolve-typology": "./lib/resolve-typology.js",
     "./lib/strip-emoji": "./lib/strip-emoji.js",
     "./lib/typologies": "./lib/typologies.js"
   },

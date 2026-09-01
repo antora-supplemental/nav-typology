@@ -21,12 +21,17 @@ html.dark-theme {
   --typology-changelog: #fb923c;
 }
 
+nav.nav-menu.nav-tree-only,
+nav.nav-menu.adt-nav-tree-only {
+  overflow-x: auto;
+}
+
 nav.nav-menu.nav-tree-only .nav-item > .nav-link,
 nav.nav-menu.adt-nav-tree-only .nav-item > .nav-link,
 nav.nav-menu.nav-tree-only .nav-item > .nav-text,
 nav.nav-menu.adt-nav-tree-only .nav-item > .nav-text {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.35rem;
 }
 
@@ -37,8 +42,20 @@ nav.nav-menu.adt-nav-tree-only .nav-typology-icon {
   min-width: var(--nav-typology-icon-size);
   max-width: var(--nav-typology-icon-size);
   flex: 0 0 var(--nav-typology-icon-size);
+  margin-top: 0.12em;
   fill: currentColor;
   overflow: visible;
+}
+
+nav.nav-menu.nav-tree-only .nav-component-logo,
+nav.nav-menu.adt-nav-tree-only .nav-component-logo {
+  width: var(--nav-typology-icon-size);
+  height: var(--nav-typology-icon-size);
+  min-width: var(--nav-typology-icon-size);
+  max-width: var(--nav-typology-icon-size);
+  flex: 0 0 var(--nav-typology-icon-size);
+  margin-top: 0.12em;
+  object-fit: contain;
 }
 
 nav.nav-menu.nav-tree-only .nav-item > .nav-link > .nav-text,
@@ -47,6 +64,7 @@ nav.nav-menu.nav-tree-only .nav-item > .nav-text > .nav-typology-label,
 nav.nav-menu.adt-nav-tree-only .nav-item > .nav-text > .nav-typology-label {
   min-width: 0;
   flex: 1 1 auto;
+  white-space: nowrap;
 }
 
 .nav-typology-icon--component-root { color: var(--typology-component-root); }

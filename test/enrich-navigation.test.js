@@ -7,11 +7,41 @@ const { enablePlugin, resetForTests } = require('../lib/plugin-api')
 const { enrichNavigationForest, detectTypologyId } = require('../lib/enrich-navigation')
 const { prioritizeChangelogSiblings } = require('../lib/changelog-nav')
 const { mergeTypologies } = require('../lib/typologies')
+const { resolveTypologyId } = require('../lib/resolve-typology')
 
 describe('stripLeadingEmoji', () => {
   it('removes leading Diátaxis emoji', () => {
     assert.equal(stripLeadingEmoji('🎓 Tutorials'), 'Tutorials')
     assert.equal(stripLeadingEmoji('🛠️ How-to Guides'), 'How-to Guides')
+  })
+})
+
+describe('resolveTypologyId', () => {
+  it('prefers explanation URL over reference title prefix', () => {
+    const id = resolveTypologyId(
+      {
+        content: 'Reference reliability',
+        url: '/general-knowledge/explanation/internet-architecture/reliability/reference-reliability.html',
+      },
+      { diataxisEnabled: true }
+    )
+    assert.equal(id, 'diataxis-explanation')
+  })
+
+  it('inherits parent Diátaxis typology for unlinked section headers', () => {
+    const id = resolveTypologyId(
+      { content: 'Internet Reliability' },
+      { diataxisEnabled: true, parentTypologyId: 'diataxis-explanation' }
+    )
+    assert.equal(id, 'diataxis-explanation')
+  })
+
+  it('does not title-match linked pages without bucket URL', () => {
+    const id = resolveTypologyId(
+      { content: 'Reference reliability', url: '/general-knowledge/explanation/foo.html' },
+      { diataxisEnabled: true }
+    )
+    assert.equal(id, 'diataxis-explanation')
   })
 })
 
@@ -62,6 +92,26 @@ describe('enrichNavigationForest', () => {
     )
     assert.equal(out[0].content, 'Tutorials')
     assert.equal(out[0].navTypology.id, 'diataxis-tutorial')
+  })
+
+  it('propagates Diátaxis typology to unlinked child headers', () => {
+    enablePlugin('diataxis')
+    const typologies = mergeTypologies()
+    const { enrichItems } = require('../lib/enrich-navigation')
+    const out = enrichItems(
+      [
+        {
+          content: 'Explanation',
+          url: '/gk/explanation/',
+          items: [{ content: 'Internet Reliability', items: [] }],
+        },
+      ],
+      { depth: 1 },
+      { stripEmoji: true },
+      typologies
+    )
+    assert.equal(out[0].navTypology.id, 'diataxis-explanation')
+    assert.equal(out[0].items[0].navTypology.id, 'diataxis-explanation')
   })
 })
 
