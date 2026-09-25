@@ -1,4 +1,4 @@
-﻿'use strict'
+'use strict'
 
 const { describe, it, beforeEach } = require('node:test')
 const assert = require('node:assert/strict')
@@ -34,6 +34,28 @@ describe('resolveTypologyId', () => {
       { diataxisEnabled: true, parentTypologyId: 'diataxis-explanation' }
     )
     assert.equal(id, 'diataxis-explanation')
+  })
+
+  it('inherits parent Diataxis typology for linked leaves without a new bucket URL', () => {
+    const id = resolveTypologyId(
+      {
+        content: 'Bitwarden CLI (agents)',
+        url: '/agent-rules/bitwarden-cli-agents.html',
+      },
+      { diataxisEnabled: true, parentTypologyId: 'diataxis-howto' }
+    )
+    assert.equal(id, 'diataxis-howto')
+  })
+
+  it('does not inherit when URL introduces a different Diataxis bucket', () => {
+    const id = resolveTypologyId(
+      {
+        content: 'Nushell Setup',
+        url: '/general-knowledge/reference/shells/nushell.html',
+      },
+      { diataxisEnabled: true, parentTypologyId: 'diataxis-howto' }
+    )
+    assert.equal(id, 'diataxis-reference')
   })
 
   it('does not title-match linked pages without bucket URL', () => {
@@ -115,6 +137,32 @@ describe('enrichNavigationForest', () => {
   })
 })
 
+
+  it('propagates Diataxis typology to cross-component linked leaves', () => {
+    enablePlugin('diataxis')
+    const typologies = mergeTypologies()
+    const { enrichItems } = require('../lib/enrich-navigation')
+    const out = enrichItems(
+      [
+        {
+          content: 'How-to Guides',
+          url: '/gk/how-to/',
+          items: [
+            { content: 'Nushell Setup', url: '/gk/how-to/nushell-setup.html' },
+            { content: 'Bitwarden CLI (agents)', url: '/agent-rules/bitwarden-cli-agents.html' },
+            { content: 'gcloud CLI (agents)', url: '/agent-rules/gcloud-cli-agents.html' },
+          ],
+        },
+      ],
+      { depth: 1 },
+      { stripEmoji: true },
+      typologies
+    )
+    assert.equal(out[0].navTypology.id, 'diataxis-howto')
+    assert.equal(out[0].items[0].navTypology.id, 'diataxis-howto')
+    assert.equal(out[0].items[1].navTypology.id, 'diataxis-howto')
+    assert.equal(out[0].items[2].navTypology.id, 'diataxis-howto')
+  })
 describe('prioritizeChangelogSiblings', () => {
   it('moves changelog to second slot after landing link', () => {
     const items = [
