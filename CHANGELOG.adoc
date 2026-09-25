@@ -1,4 +1,8 @@
-= Changelog
+﻿= Changelog
+
+== 0.1.5 (2026-09-25)
+
+* Hard-sort nav siblings **Home/Overview** then **Changelog/Activity Log** then the rest (extends the former changelog-only hoist).
 
 == 0.1.4 (2026-09-01)
 

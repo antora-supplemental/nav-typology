@@ -1,4 +1,4 @@
-'use strict'
+﻿'use strict'
 
 const { describe, it, beforeEach } = require('node:test')
 const assert = require('node:assert/strict')
@@ -126,6 +126,32 @@ describe('prioritizeChangelogSiblings', () => {
     assert.deepEqual(
       out.map((i) => i.content),
       ['Dev Center', 'Changelog', 'Roadmap']
+    )
+  })
+
+  it('puts Home then Changelog before the rest', () => {
+    const items = [
+      { content: 'Usage', url: '/ar/usage/' },
+      { content: 'Changelog', url: '/ar/changelog/' },
+      { content: 'Home', url: '/ar/' },
+    ]
+    const out = prioritizeChangelogSiblings(items)
+    assert.deepEqual(
+      out.map((i) => i.content),
+      ['Home', 'Changelog', 'Usage']
+    )
+  })
+
+  it('treats Overview like Home for hard-sort', () => {
+    const items = [
+      { content: 'Usage', url: '/ar/usage/' },
+      { content: 'Activity Log', url: '/home/activity-log/' },
+      { content: 'Overview', url: '/ar/' },
+    ]
+    const out = prioritizeChangelogSiblings(items)
+    assert.deepEqual(
+      out.map((i) => i.content),
+      ['Overview', 'Activity Log', 'Usage']
     )
   })
 })
