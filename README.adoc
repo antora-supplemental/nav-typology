@@ -64,6 +64,18 @@ Link CSS in `head-meta.hbs` (or `{{> head-nav-typology-css}}` after copying the 
 <link rel="stylesheet" href="{{{uiRootPath}}}/css/nav-typology.css">
 ----
 
+== Explicit typology (page attrs)
+
+Prefer **explicit** typology over inventing URL-folder heuristics when the path is tree hierarchy (Business Bootstrap capability areas). Set on the page:
+
+[source,asciidoc]
+----
+= Escalate DMARC policy
+:page-nav-typology: diataxis-howto
+----
+
+Or pass `navTypologyId` on a nav item from another extension. Antora `nav.adoc` attribute wiring remains optional future work.
+
 == Optional config
 
 [source,yaml]
@@ -73,6 +85,9 @@ Link CSS in `head-meta.hbs` (or `{{> head-nav-typology-css}}` after copying the 
   componentTypologies:
     DevCentr: component-root
     general-knowledge: component-root
+  # Skip Diataxis URL path markers under these prefixes (tree = hierarchy).
+  diataxisUrlExcludePrefixes:
+    - /business-bootstrap/
 ----
 
 == Plugins

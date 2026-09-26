@@ -203,3 +203,59 @@ describe('prioritizeChangelogSiblings', () => {
     )
   })
 })
+
+
+describe('overview typology', () => {
+  beforeEach(() => resetForTests())
+
+  it('detects Overview label as overview typology', () => {
+    assert.equal(
+      detectTypologyId({ content: 'Overview', url: '/business-bootstrap/' }, { depth: 1 }, {}),
+      'overview'
+    )
+  })
+
+  it('detects Home label as overview typology', () => {
+    assert.equal(
+      detectTypologyId({ content: 'Home', url: '/tools/' }, { depth: 1 }, {}),
+      'overview'
+    )
+  })
+})
+
+describe('diataxisUrlExcludePrefixes + explicit page map', () => {
+  beforeEach(() => resetForTests())
+
+  it('skips URL Diataxis heuristics under excluded prefixes', () => {
+    enablePlugin('diataxis')
+    const id = resolveTypologyId(
+      {
+        content: 'Escalate DMARC policy',
+        url: '/business-bootstrap/how-to/dmarc-escalation/',
+      },
+      {
+        diataxisEnabled: true,
+        diataxisUrlExcludePrefixes: ['/business-bootstrap/'],
+      }
+    )
+    assert.equal(id, undefined)
+  })
+
+  it('honors explicitByUrl over URL heuristics', () => {
+    enablePlugin('diataxis')
+    const map = new Map([['/business-bootstrap/how-to/dmarc-escalation', 'diataxis-howto']])
+    const id = resolveTypologyId(
+      {
+        content: 'Escalate DMARC policy',
+        url: '/business-bootstrap/how-to/dmarc-escalation/',
+      },
+      {
+        diataxisEnabled: true,
+        diataxisUrlExcludePrefixes: ['/business-bootstrap/'],
+        explicitByUrl: map,
+      }
+    )
+    assert.equal(id, 'diataxis-howto')
+  })
+})
+

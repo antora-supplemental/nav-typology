@@ -1,5 +1,12 @@
 = Changelog
 
+== 0.1.7 (2026-09-26)
+
+* **Overview** typology icon for nav labels Overview/Home (forest start-page peers).
+* Explicit typology from page attrs `:page-nav-typology:` / `:nav-typology:` (URL map at `navigationBuilt`).
+* Config `diataxisUrlExcludePrefixes`: skip Diataxis *URL path* heuristics under listed prefixes (Business Bootstrap tree hierarchy); explicit attrs and `navTypologyId` still apply.
+
+
 == 0.1.6 (2026-09-25)
 
 * Diataxis inheritance: linked leaves inherit the parent typology unless their URL introduces a new recognized bucket (fixes cross-component How-to entries such as Bitwarden CLI / gcloud CLI under general-knowledge).

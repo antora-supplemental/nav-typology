@@ -19,6 +19,11 @@ const TYPOLOGIES = {
     spriteId: 'icon-changelog',
     label: 'Changelog',
   },
+  overview: {
+    id: 'overview',
+    spriteId: 'icon-overview',
+    label: 'Overview',
+  },
 }
 
 function diataxisEnabled ({ data } = {}) {

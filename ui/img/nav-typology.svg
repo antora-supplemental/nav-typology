@@ -25,4 +25,7 @@
     <path fill="currentColor" d="M4 2h8l2 2v10H4V2Zm1 1v11h10V5h-2V3H5Zm1 5h8v1H6V8Zm0 2h6v1H6v-1Zm0 2h5v1H6v-1Z"/>
     <path fill="currentColor" d="M11.5 2.5 13 4l-3.5 3.5L8 6 11.5 2.5Z"/>
   </symbol>
+  <symbol id="icon-overview" viewBox="0 0 16 16">
+    <path fill="currentColor" d="M8 1.5A6.5 6.5 0 1 0 8 14.5 6.5 6.5 0 0 0 8 1.5Zm0 1a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11Zm0 1.75a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5ZM5.5 9.25h5v1h-5v-1Zm1 2h3v1h-3v-1Z"/>
+  </symbol>
 </svg>
