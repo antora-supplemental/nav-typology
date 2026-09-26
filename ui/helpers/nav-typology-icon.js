@@ -26,9 +26,36 @@ const TYPOLOGIES = {
   },
 }
 
-function diataxisEnabled ({ data } = {}) {
-  const keys = (data && data.root && data.root.site && data.root.site.keys) || {}
+/** Typologies that render an icon by default (component-root is opt-in). */
+const DEFAULT_ICON_IDS = new Set([
+  'spec-component',
+  'spec-feature',
+  'diataxis-tutorial',
+  'diataxis-howto',
+  'diataxis-reference',
+  'diataxis-explanation',
+  'changelog',
+  'overview',
+])
+
+function siteKeys (options = {}) {
+  return (options.data && options.data.root && options.data.root.site && options.data.root.site.keys) || {}
+}
+
+function diataxisEnabled (options = {}) {
+  const keys = siteKeys(options)
   return keys.nav_typology_diataxis === 'true' || keys.nav_typology === 'true'
+}
+
+/** Opt-in: site.keys.nav_typology_component_root_icons === 'true' */
+function componentRootIconsEnabled (options = {}) {
+  return siteKeys(options).nav_typology_component_root_icons === 'true'
+}
+
+function shouldRenderIcon (meta, options = {}) {
+  if (!meta) return false
+  if (meta.id === 'component-root') return componentRootIconsEnabled(options)
+  return DEFAULT_ICON_IDS.has(meta.id)
 }
 
 function resolveTypology (item, options = {}) {
@@ -56,10 +83,15 @@ function resolveTypology (item, options = {}) {
 
 module.exports = (item, options = {}) => {
   const meta = resolveTypology(item, options)
-  if (!meta) return ''
+  if (!shouldRenderIcon(meta, options)) return ''
   const uiRoot = options.data?.root?.uiRootPath || options.data?.root?.siteRootPath || '/_'
+  // Explicit size attributes match --nav-typology-icon-size (solid glyphs read larger).
   return (
-    `<svg class="nav-typology-icon nav-typology-icon--${meta.id}" width="12" height="12" viewBox="0 0 16 16" aria-hidden="true">` +
+    `<svg class="nav-typology-icon nav-typology-icon--${meta.id}" width="14" height="14" viewBox="0 0 16 16" aria-hidden="true">` +
     `<use href="${uiRoot}/img/nav-typology.svg#${meta.spriteId}"/></svg>`
   )
 }
+
+module.exports.resolveTypology = resolveTypology
+module.exports.shouldRenderIcon = shouldRenderIcon
+module.exports.componentRootIconsEnabled = componentRootIconsEnabled

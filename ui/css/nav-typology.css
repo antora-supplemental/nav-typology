@@ -8,7 +8,11 @@
   --typology-diataxis-explanation: #d97706;
   --typology-changelog: #c2410c;
   --typology-overview: #0f766e;
-  --nav-typology-icon-size: 0.85em;
+  /* Larger solid glyphs; DeepWiki left-nav text-sm ≈ 0.875rem */
+  --nav-typology-icon-size: 1.05em;
+  --nav-typology-font-size: 0.875rem;
+  --nav-typology-font-size-root: 0.9375rem;
+  --nav-typology-toggle-size: 0.625rem;
 }
 
 html.dark-theme {
@@ -23,9 +27,13 @@ html.dark-theme {
   --typology-overview: #2dd4bf;
 }
 
+/*
+ * Avoid a nested horizontal scrollport inside the SoftNav rail (wheel / middle-button
+ * jank). Clip overflow; labels wrap or ellipsize instead of forcing overflow-x:auto.
+ */
 nav.nav-menu.nav-tree-only,
 nav.nav-menu.adt-nav-tree-only {
-  overflow-x: auto;
+  overflow-x: hidden;
 }
 
 nav.nav-menu.nav-tree-only .nav-item > .nav-link,
@@ -34,7 +42,27 @@ nav.nav-menu.nav-tree-only .nav-item > .nav-text,
 nav.nav-menu.adt-nav-tree-only .nav-item > .nav-text {
   display: flex;
   align-items: flex-start;
-  gap: 0.35rem;
+  gap: 0.4rem;
+  font-size: var(--nav-typology-font-size);
+  line-height: 1.35;
+}
+
+/* Component forest roots: slightly larger section label (DeepWiki section feel). */
+nav.nav-menu.nav-tree-only .nav-item[data-depth="0"] > .nav-link,
+nav.nav-menu.adt-nav-tree-only .nav-item[data-depth="0"] > .nav-link,
+nav.nav-menu.nav-tree-only .nav-item[data-depth="0"] > .nav-text,
+nav.nav-menu.adt-nav-tree-only .nav-item[data-depth="0"] > .nav-text {
+  font-size: var(--nav-typology-font-size-root);
+  font-weight: 600;
+}
+
+/* Expander chevrons must stay smaller than label text. */
+nav.nav-menu.nav-tree-only .nav-item-toggle,
+nav.nav-menu.adt-nav-tree-only .nav-item-toggle {
+  width: var(--nav-typology-toggle-size) !important;
+  height: var(--nav-typology-toggle-size) !important;
+  min-width: var(--nav-typology-toggle-size);
+  min-height: var(--nav-typology-toggle-size);
 }
 
 nav.nav-menu.nav-tree-only .nav-typology-icon,
@@ -44,7 +72,7 @@ nav.nav-menu.adt-nav-tree-only .nav-typology-icon {
   min-width: var(--nav-typology-icon-size);
   max-width: var(--nav-typology-icon-size);
   flex: 0 0 var(--nav-typology-icon-size);
-  margin-top: 0.12em;
+  margin-top: 0.15em;
   fill: currentColor;
   overflow: visible;
 }
@@ -56,7 +84,7 @@ nav.nav-menu.adt-nav-tree-only .nav-component-logo {
   min-width: var(--nav-typology-icon-size);
   max-width: var(--nav-typology-icon-size);
   flex: 0 0 var(--nav-typology-icon-size);
-  margin-top: 0.12em;
+  margin-top: 0.15em;
   object-fit: contain;
 }
 
@@ -66,7 +94,9 @@ nav.nav-menu.nav-tree-only .nav-item > .nav-text > .nav-typology-label,
 nav.nav-menu.adt-nav-tree-only .nav-item > .nav-text > .nav-typology-label {
   min-width: 0;
   flex: 1 1 auto;
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .nav-typology-icon--component-root { color: var(--typology-component-root); }

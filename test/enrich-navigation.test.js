@@ -259,3 +259,33 @@ describe('diataxisUrlExcludePrefixes + explicit page map', () => {
   })
 })
 
+
+describe('nav-typology-icon helper (component-root off by default)', () => {
+  const iconHelper = require('../ui/helpers/nav-typology-icon')
+
+  it('does not render an icon for component-root by default', () => {
+    const item = { content: 'Platforms', url: '/platforms/', items: [{}] }
+    const html = iconHelper(item, { hash: { level: 0 }, data: { root: { site: { keys: {} }, uiRootPath: '/_' } } })
+    assert.equal(html, '')
+  })
+
+  it('renders component-root icon when site.keys.nav_typology_component_root_icons is true', () => {
+    const item = { content: 'Platforms', url: '/platforms/', items: [{}] }
+    const html = iconHelper(item, {
+      hash: { level: 0 },
+      data: { root: { site: { keys: { nav_typology_component_root_icons: 'true' } }, uiRootPath: '/_' } },
+    })
+    assert.match(html, /nav-typology-icon--component-root/)
+    assert.match(html, /icon-component-root/)
+  })
+
+  it('renders overview solid icon', () => {
+    const item = { content: 'Overview', url: '/platforms/' }
+    const html = iconHelper(item, {
+      hash: { level: 1 },
+      data: { root: { site: { keys: {} }, uiRootPath: '/_' } },
+    })
+    assert.match(html, /nav-typology-icon--overview/)
+    assert.match(html, /icon-overview/)
+  })
+})

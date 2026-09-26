@@ -1,5 +1,12 @@
 = Changelog
 
+== 0.1.8 (2026-09-26)
+
+* **Component-root icons off by default** (Home, Business Bootstrap, Platforms, …). Expanders already mark roots; icons were too noisy. Opt in with `site.keys.nav_typology_component_root_icons: 'true'`.
+* **Solid glyph set** (filled SVG, not wireframe): Overview = square; Changelog = three short bars; Tutorials = graduation cap; How-to = work glove; Reference = book; Explanation = open encyclopedia/wiki book. Spec marks updated to match.
+* Larger default icon size (`--nav-typology-icon-size: 1.05em`) and DeepWiki-like nav type scale (`0.875rem` items / `0.9375rem` depth-0 roots); expander toggle `0.625rem` (smaller than text).
+* Drop `overflow-x: auto` on the tree (use `hidden` + wrapping labels) to avoid nested horizontal scrollports / wheel jank.
+
 == 0.1.7 (2026-09-26)
 
 * **Overview** typology icon for nav labels Overview/Home (forest start-page peers).
@@ -20,9 +27,9 @@
 
 == 0.1.3 (2026-09-01)
 
-* Diátaxis detection: URL path wins over title prefix (fixes *Reference reliability* under `/explanation/`).
+* DiÃ¡taxis detection: URL path wins over title prefix (fixes *Reference reliability* under `/explanation/`).
 * Title heuristics apply only to unlinked nav headers (no URL).
-* Unlinked section headers inherit the nearest ancestor Diátaxis typology at build time; render helpers accept `parentTypologyId` from `nav-tree`.
+* Unlinked section headers inherit the nearest ancestor DiÃ¡taxis typology at build time; render helpers accept `parentTypologyId` from `nav-tree`.
 * Nav CSS: top-align typology icons (`flex-start`); single-line labels with horizontal scroll on deep trees.
 
 == 0.1.2 (2026-09-01)
@@ -38,4 +45,4 @@
 
 == 0.1.0 (2026-09-01)
 
-* Initial release: navigation enrichment, SVG sprite, nav-tree partial override, optional Diátaxis plugin package.
+* Initial release: navigation enrichment, SVG sprite, nav-tree partial override, optional DiÃ¡taxis plugin package.
