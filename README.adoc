@@ -97,6 +97,14 @@ Or pass `navTypologyId` on a nav item from another extension. Antora `nav.adoc` 
 
 **Ship v1:** register the extension + copy companion UI into `supplemental-ui/` and link `nav-typology.css` in `head-meta.hbs` (see site-nav-tree / site-math pattern). Optional `nav-typology-diataxis` for Diátaxis sites only.
 
+== Demo data
+
+Typology icons apply to nav items from whatever `content.sources` you compose — there is no separate `nav-typology` fixture component.
+
+* Multi-root forest smoke: compose link:https://github.com/antora-supplemental/demo-data[`demo-data`^] `docs/fixtures/site-nav-tree` and register site-nav-tree + nav-typology (see site-nav-tree README).
+* Baseline body pages: `demo-data` `docs/theme-demo` — do not duplicate in this repo.
+* Pattern: link:https://docs.antora-supplemental.org/docs/ROOT/proposals/demo-data-catalog.html[Demo data catalog^].
+
 == Related
 
 * `@antora-supplemental/site-nav-tree` — site-wide component forest (register nav-typology after this)
