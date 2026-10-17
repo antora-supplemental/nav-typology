@@ -1,5 +1,9 @@
 = Changelog
 
+== 0.1.10 (2026-10-17)
+
+* **Overview leaves carry no typology icon** and render **bold**, like Changelog items. The `overview` typology id (and `data-nav-typology="overview"`) is unchanged, so current-page styling and hard-sort still treat Overview/Home as landing peers.
+
 == 0.1.9 (2026-10-17)
 
 * Nav tree alignment: center typology icons with label text (drop extra `margin-top`); recalculate expander chevron `top` for the smaller `--nav-typology-toggle-size` so carets line up with the first text line (Valentus assumed 0.8em glyphs).

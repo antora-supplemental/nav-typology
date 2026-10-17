@@ -26,7 +26,11 @@ const TYPOLOGIES = {
   },
 }
 
-/** Typologies that render an icon by default (component-root is opt-in). */
+/**
+ * Typologies that render an icon by default (component-root is opt-in).
+ * Overview/Home leaves get no icon: they are landing peers, set in bold
+ * like Changelog instead of carrying a typology glyph.
+ */
 const DEFAULT_ICON_IDS = new Set([
   'spec-component',
   'spec-feature',
@@ -35,7 +39,6 @@ const DEFAULT_ICON_IDS = new Set([
   'diataxis-reference',
   'diataxis-explanation',
   'changelog',
-  'overview',
 ])
 
 function siteKeys (options = {}) {

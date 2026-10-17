@@ -128,3 +128,11 @@ nav.nav-menu.nav-tree-only .nav-item[data-nav-typology="changelog"] > .nav-text,
 nav.nav-menu.adt-nav-tree-only .nav-item[data-nav-typology="changelog"] > .nav-text {
   font-weight: 600;
 }
+
+/* Overview/Home landing leaves: bold like Changelog, no typology icon. */
+nav.nav-menu.nav-tree-only .nav-item[data-nav-typology="overview"] > .nav-link,
+nav.nav-menu.adt-nav-tree-only .nav-item[data-nav-typology="overview"] > .nav-link,
+nav.nav-menu.nav-tree-only .nav-item[data-nav-typology="overview"] > .nav-text,
+nav.nav-menu.adt-nav-tree-only .nav-item[data-nav-typology="overview"] > .nav-text {
+  font-weight: 600;
+}

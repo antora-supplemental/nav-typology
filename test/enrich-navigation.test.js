@@ -279,13 +279,12 @@ describe('nav-typology-icon helper (component-root off by default)', () => {
     assert.match(html, /icon-component-root/)
   })
 
-  it('renders overview solid icon', () => {
+  it('renders no icon for Overview leaves (bold landing peer, like Changelog text)', () => {
     const item = { content: 'Overview', url: '/platforms/' }
     const html = iconHelper(item, {
       hash: { level: 1 },
       data: { root: { site: { keys: {} }, uiRootPath: '/_' } },
     })
-    assert.match(html, /nav-typology-icon--overview/)
-    assert.match(html, /icon-overview/)
+    assert.equal(html, '')
   })
 })
