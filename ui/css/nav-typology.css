@@ -41,7 +41,7 @@ nav.nav-menu.adt-nav-tree-only .nav-item > .nav-link,
 nav.nav-menu.nav-tree-only .nav-item > .nav-text,
 nav.nav-menu.adt-nav-tree-only .nav-item > .nav-text {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 0.4rem;
   font-size: var(--nav-typology-font-size);
   line-height: 1.35;
@@ -63,6 +63,17 @@ nav.nav-menu.adt-nav-tree-only .nav-item-toggle {
   height: var(--nav-typology-toggle-size) !important;
   min-width: var(--nav-typology-toggle-size);
   min-height: var(--nav-typology-toggle-size);
+  /* Valentus uses top: 0.2rem for 0.8em chevrons; recenter for our smaller glyph + row padding. */
+  top: calc(
+    0.12rem + (var(--nav-typology-font-size) * 1.35 - var(--nav-typology-toggle-size)) / 2
+  ) !important;
+}
+
+nav.nav-menu.nav-tree-only .nav-item[data-depth="0"] > .nav-item-toggle,
+nav.nav-menu.adt-nav-tree-only .nav-item[data-depth="0"] > .nav-item-toggle {
+  top: calc(
+    0.12rem + (var(--nav-typology-font-size-root) * 1.35 - var(--nav-typology-toggle-size)) / 2
+  ) !important;
 }
 
 nav.nav-menu.nav-tree-only .nav-typology-icon,
@@ -72,7 +83,8 @@ nav.nav-menu.adt-nav-tree-only .nav-typology-icon {
   min-width: var(--nav-typology-icon-size);
   max-width: var(--nav-typology-icon-size);
   flex: 0 0 var(--nav-typology-icon-size);
-  margin-top: 0.15em;
+  margin-top: 0;
+  align-self: center;
   fill: currentColor;
   overflow: visible;
 }
@@ -84,7 +96,8 @@ nav.nav-menu.adt-nav-tree-only .nav-component-logo {
   min-width: var(--nav-typology-icon-size);
   max-width: var(--nav-typology-icon-size);
   flex: 0 0 var(--nav-typology-icon-size);
-  margin-top: 0.15em;
+  margin-top: 0;
+  align-self: center;
   object-fit: contain;
 }
 

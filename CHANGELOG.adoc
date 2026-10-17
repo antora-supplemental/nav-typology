@@ -1,5 +1,9 @@
 = Changelog
 
+== 0.1.9 (2026-10-17)
+
+* Nav tree alignment: center typology icons with label text (drop extra `margin-top`); recalculate expander chevron `top` for the smaller `--nav-typology-toggle-size` so carets line up with the first text line (Valentus assumed 0.8em glyphs).
+
 == 0.1.8 (2026-09-26)
 
 * **Component-root icons off by default** (Home, Business Bootstrap, Platforms, …). Expanders already mark roots; icons were too noisy. Opt in with `site.keys.nav_typology_component_root_icons: 'true'`.
