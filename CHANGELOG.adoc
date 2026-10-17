@@ -1,5 +1,9 @@
 = Changelog
 
+== 0.1.11 (2026-10-17)
+
+* **Overview inherits a typed parent's icon.** An Overview leaf whose parent nav node carries a typology (Diátaxis bucket, spec component/feature, changelog) now renders that parent's icon in front of it. Its own typology stays `overview`, so bold landing-peer styling still applies; an Overview under an untyped or overview parent keeps no icon.
+
 == 0.1.10 (2026-10-17)
 
 * **Overview leaves carry no typology icon** and render **bold**, like Changelog items. The `overview` typology id (and `data-nav-typology="overview"`) is unchanged, so current-page styling and hard-sort still treat Overview/Home as landing peers.

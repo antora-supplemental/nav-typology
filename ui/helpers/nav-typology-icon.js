@@ -85,7 +85,15 @@ function resolveTypology (item, options = {}) {
 }
 
 module.exports = (item, options = {}) => {
-  const meta = resolveTypology(item, options)
+  let meta = resolveTypology(item, options)
+  // An Overview leaf under a typed node inherits that node's icon (its own
+  // typology stays 'overview' so landing-peer styling/bold still applies).
+  if (meta && meta.id === 'overview') {
+    const parentId = options.hash?.parentTypologyId || ''
+    if (parentId && TYPOLOGIES[parentId] && DEFAULT_ICON_IDS.has(parentId)) {
+      meta = TYPOLOGIES[parentId]
+    }
+  }
   if (!shouldRenderIcon(meta, options)) return ''
   const uiRoot = options.data?.root?.uiRootPath || options.data?.root?.siteRootPath || '/_'
   // Explicit size attributes match --nav-typology-icon-size (solid glyphs read larger).

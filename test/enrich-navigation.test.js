@@ -287,4 +287,23 @@ describe('nav-typology-icon helper (component-root off by default)', () => {
     })
     assert.equal(html, '')
   })
+
+  it('Overview under a typed node inherits that node typology icon', () => {
+    const item = { content: 'Overview', url: '/general-knowledge/explanation/' }
+    const html = iconHelper(item, {
+      hash: { level: 2, parentTypologyId: 'diataxis-explanation' },
+      data: { root: { site: { keys: {} }, uiRootPath: '/_' } },
+    })
+    assert.match(html, /nav-typology-icon--diataxis-explanation/)
+    assert.match(html, /icon-diataxis-explanation/)
+  })
+
+  it('Overview under an untyped or overview parent keeps no icon', () => {
+    const item = { content: 'Overview', url: '/home/docs-site/' }
+    const html = iconHelper(item, {
+      hash: { level: 2, parentTypologyId: 'overview' },
+      data: { root: { site: { keys: {} }, uiRootPath: '/_' } },
+    })
+    assert.equal(html, '')
+  })
 })
