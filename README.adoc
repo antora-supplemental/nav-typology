@@ -43,27 +43,15 @@ antora:
 * Explicit override: set `navTypologyId` on a nav item object (extension API; Antora nav.adoc attribute wiring is future work).
 * Hoists changelog siblings to position 2 in each nav branch (after the first landing link).
 * Strips leading structural emoji from nav labels when a typology icon replaces them.
-* Ships `ui/partials/nav-tree.hbs`, `ui/helpers/nav-typology-*.js`, `ui/css/nav-typology.css`, `ui/img/nav-typology.svg`, and `ui/partials/head-nav-typology-css.hbs`.
+* Injects companion UI at build time (`uiLoaded`): `nav-tree` partial, helpers, CSS, and SVG sprite. Stylesheet link is appended to `head-meta` when present.
 
-== Companion UI (required)
+== Companion UI
 
-Antora does not auto-merge extension UI. Copy into hub `supplemental-ui/`:
+**Default:** no manual copy step. On `uiLoaded`, the extension merges `ui/` into the Antora UI catalog and replaces any stale files under hub `supplemental-ui/` with the same paths.
 
-[source,bash]
-----
-cp node_modules/@antora-supplemental/nav-typology/ui/partials/nav-tree.hbs supplemental-ui/partials/
-cp node_modules/@antora-supplemental/nav-typology/ui/helpers/nav-typology-*.js supplemental-ui/helpers/
-cp node_modules/@antora-supplemental/nav-typology/ui/helpers/strip-nav-typology-emoji.js supplemental-ui/helpers/
-cp node_modules/@antora-supplemental/nav-typology/ui/css/nav-typology.css supplemental-ui/css/
-cp node_modules/@antora-supplemental/nav-typology/ui/img/nav-typology.svg supplemental-ui/img/
-----
+Optional hub-only overrides: copy files into `supplemental-ui/` *after* disabling injection (`ui: false` on the extension require) or fork individual partials/helpers locally.
 
-Link CSS in `head-meta.hbs` (or `{{> head-nav-typology-css}}` after copying the snippet partial):
-
-[source,html]
-----
-<link rel="stylesheet" href="{{{uiRootPath}}}/css/nav-typology.css">
-----
+Legacy manual copy (pre v0.1.12) is obsolete once the playbook pins `@antora-supplemental/nav-typology` >= `v0.1.12`.
 
 == Explicit typology (page attrs)
 

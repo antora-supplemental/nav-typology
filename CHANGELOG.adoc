@@ -1,5 +1,9 @@
 = Changelog
 
+== 0.1.12 (2026-10-21)
+
+* **Companion UI auto-injects on `uiLoaded`.** Partials (`nav-tree`), Handlebars helpers, CSS, and the SVG sprite merge into the UI catalog at build time (same pattern as `@antora-supplemental/site-nav-tree` and `@antora-supplemental/antora-search-chat`). Hubs no longer need to copy `ui/` into `supplemental-ui/`; stale copies are replaced when present. Disable with extension config `ui: false` or `injectUi: false`.
+
 == 0.1.11 (2026-10-17)
 
 * **Overview inherits a typed parent's icon.** An Overview leaf whose parent nav node carries a typology (Diátaxis bucket, spec component/feature, changelog) now renders that parent's icon in front of it. Its own typology stays `overview`, so bold landing-peer styling still applies; an Overview under an untyped or overview parent keeps no icon.
